@@ -1,0 +1,368 @@
+{
+  "entities": {
+    "Student": {
+      "$schema": "http://json-schema.org/draft-07/schema#",
+      "title": "Student",
+      "type": "object",
+      "description": "Represents a student in the university.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Unique identifier for the student.",
+          "format": "uuid"
+        },
+        "firstName": {
+          "type": "string",
+          "description": "The first name of the student."
+        },
+        "lastName": {
+          "type": "string",
+          "description": "The last name of the student."
+        },
+        "email": {
+          "type": "string",
+          "description": "The email address of the student.",
+          "format": "email"
+        },
+        "major": {
+          "type": "string",
+          "description": "The student's major."
+        },
+        "courseIds": {
+          "type": "array",
+          "description": "References to Courses. (Relationship: Student N:N Course)",
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "required": [
+        "id",
+        "firstName",
+        "lastName",
+        "email",
+        "major"
+      ]
+    },
+    "Course": {
+      "$schema": "http://json-schema.org/draft-07/schema#",
+      "title": "Course",
+      "type": "object",
+      "description": "Represents a course offered by the university.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Unique identifier for the course.",
+          "format": "uuid"
+        },
+        "name": {
+          "type": "string",
+          "description": "The name of the course."
+        },
+        "description": {
+          "type": "string",
+          "description": "A description of the course."
+        },
+        "credits": {
+          "type": "number",
+          "description": "The number of credits the course is worth."
+        },
+        "teacherId": {
+          "type": "string",
+          "description": "Reference to Teacher. (Relationship: Teacher 1:N Course)"
+        }
+      },
+      "required": [
+        "id",
+        "name",
+        "description",
+        "credits",
+        "teacherId"
+      ]
+    },
+    "Teacher": {
+      "$schema": "http://json-schema.org/draft-07/schema#",
+      "title": "Teacher",
+      "type": "object",
+      "description": "Represents a teacher at the university.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Unique identifier for the teacher.",
+          "format": "uuid"
+        },
+        "firstName": {
+          "type": "string",
+          "description": "The first name of the teacher."
+        },
+        "lastName": {
+          "type": "string",
+          "description": "The last name of the teacher."
+        },
+        "email": {
+          "type": "string",
+          "description": "The email address of the teacher.",
+          "format": "email"
+        },
+        "department": {
+          "type": "string",
+          "description": "The department the teacher belongs to."
+        }
+      },
+      "required": [
+        "id",
+        "firstName",
+        "lastName",
+        "email",
+        "department"
+      ]
+    },
+    "Announcement": {
+      "$schema": "http://json-schema.org/draft-07/schema#",
+      "title": "Announcement",
+      "type": "object",
+      "description": "Represents a university-wide announcement.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Unique identifier for the announcement.",
+          "format": "uuid"
+        },
+        "title": {
+          "type": "string",
+          "description": "The title of the announcement."
+        },
+        "content": {
+          "type": "string",
+          "description": "The content of the announcement."
+        },
+        "date": {
+          "type": "string",
+          "description": "The date the announcement was created.",
+          "format": "date-time"
+        }
+      },
+      "required": [
+        "id",
+        "title",
+        "content",
+        "date"
+      ]
+    },
+    "Grade": {
+      "$schema": "http://json-schema.org/draft-07/schema#",
+      "title": "Grade",
+      "type": "object",
+      "description": "Represents a student's grade in a course.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Unique identifier for the grade.",
+          "format": "uuid"
+        },
+        "studentId": {
+          "type": "string",
+          "description": "Reference to Student. (Relationship: Student 1:N Grade)"
+        },
+        "courseId": {
+          "type": "string",
+          "description": "Reference to Course. (Relationship: Course 1:N Grade)"
+        },
+        "grade": {
+          "type": "string",
+          "description": "The grade the student received in the course."
+        }
+      },
+      "required": [
+        "id",
+        "studentId",
+        "courseId",
+        "grade"
+      ]
+    },
+    "ChatMessage": {
+      "$schema": "http://json-schema.org/draft-07/schema#",
+      "title": "ChatMessage",
+      "type": "object",
+      "description": "Represents a chat message in the student community.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Unique identifier for the chat message.",
+          "format": "uuid"
+        },
+        "studentId": {
+          "type": "string",
+          "description": "Reference to Student. (Relationship: Student 1:N ChatMessage)",
+          "format": "uuid"
+        },
+        "studentName": {
+          "type": "string",
+          "description": "The name of the student who sent the message."
+        },
+        "content": {
+          "type": "string",
+          "description": "The content of the chat message."
+        },
+        "timestamp": {
+          "type": "string",
+          "description": "The timestamp of the chat message.",
+          "format": "date-time"
+        }
+      },
+      "required": [
+        "id",
+        "studentId",
+        "studentName",
+        "content",
+        "timestamp"
+      ]
+    },
+    "WritingResource": {
+      "$schema": "http://json-schema.org/draft-07/schema#",
+      "title": "Writing Resource",
+      "type": "object",
+      "description": "Represents a collaborative writing resource topic.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Unique identifier for the writing resource."
+        },
+        "title": {
+          "type": "string",
+          "description": "The title of the writing topic."
+        },
+        "content": {
+          "type": "string",
+          "description": "The collaborative content for the topic."
+        }
+      },
+      "required": ["id", "title", "content"]
+    }
+  },
+  "auth": {
+    "providers": [
+      "password",
+      "anonymous"
+    ]
+  },
+  "firestore": {
+    "structure": [
+      {
+        "path": "/students/{studentId}",
+        "definition": {
+          "entityName": "Student",
+          "schema": {
+            "$ref": "#/backend/entities/Student"
+          },
+          "description": "Stores student profile information.  Authorization is based on path-based ownership: only the student (or admin) can read/write their own profile.",
+          "params": [
+            {
+              "name": "studentId",
+              "description": "The unique identifier of the student."
+            }
+          ]
+        }
+      },
+      {
+        "path": "/courses/{courseId}",
+        "definition": {
+          "entityName": "Course",
+          "schema": {
+            "$ref": "#/backend/entities/Course"
+          },
+          "description": "Stores course information. Publicly readable, but write access is restricted to authorized personnel (e.g., admins).",
+          "params": [
+            {
+              "name": "courseId",
+              "description": "The unique identifier of the course."
+            }
+          ]
+        }
+      },
+      {
+        "path": "/teachers/{teacherId}",
+        "definition": {
+          "entityName": "Teacher",
+          "schema": {
+            "$ref": "#/backend/entities/Teacher"
+          },
+          "description": "Stores teacher profile information. Authorization: write access restricted to authorized personnel (e.g., admins).",
+          "params": [
+            {
+              "name": "teacherId",
+              "description": "The unique identifier of the teacher."
+            }
+          ]
+        }
+      },
+      {
+        "path": "/announcements/{announcementId}",
+        "definition": {
+          "entityName": "Announcement",
+          "schema": {
+            "$ref": "#/backend/entities/Announcement"
+          },
+          "description": "Stores university-wide announcements. Publicly readable, but write access is restricted to authorized personnel (e.g., admins).",
+          "params": [
+            {
+              "name": "announcementId",
+              "description": "The unique identifier of the announcement."
+            }
+          ]
+        }
+      },
+      {
+        "path": "/grades/{gradeId}",
+        "definition": {
+          "entityName": "Grade",
+          "schema": {
+            "$ref": "#/backend/entities/Grade"
+          },
+          "description": "Stores student grades. Authorization is based on the studentId field within the grade document. Only the student with the matching ID can read the grade.",
+          "params": [
+            {
+              "name": "gradeId",
+              "description": "The unique identifier of the grade."
+            }
+          ]
+        }
+      },
+      {
+        "path": "/studentCommunityChat/{messageId}",
+        "definition": {
+          "entityName": "ChatMessage",
+          "schema": {
+            "$ref": "#/backend/entities/ChatMessage"
+          },
+          "description": "Stores chat messages for the student community. Any authenticated student can create messages.  Read access is public within the student community. Includes studentId to verify the author.",
+          "params": [
+            {
+              "name": "messageId",
+              "description": "The unique identifier of the chat message."
+            }
+          ]
+        }
+      },
+      {
+        "path": "/writingPortal/{resourceId}",
+        "definition": {
+          "entityName": "WritingResource",
+          "schema": {
+            "$ref": "#/backend/entities/WritingResource"
+          },
+          "description": "Stores collaborative writing resources. Publicly readable and writable to allow for community contributions.",
+          "params": [
+            {
+              "name": "resourceId",
+              "description": "The unique identifier for the writing resource topic."
+            }
+          ]
+        }
+      }
+    ],
+    "reasoning": "The Firestore structure is designed to ensure authorization independence, clarity, and scalability. User data and associated resources (grades, courses) are organized under the `/users/{userId}` path to leverage path-based ownership, which simplifies security rules. The student community chat is implemented using a top-level `/studentCommunityChat/{messageId}` collection to facilitate open communication among all students. The courses and teacher are in top level collection . This design avoids hierarchical authorization dependencies (`get()`) by storing authorization data directly within the documents where needed, which is critical for maintaining atomic operations and simplifying debugging. For the chat messages, authorization is based on the user being authenticated, ensuring that only logged-in users can post messages. This structure facilitates secure `list` operations, as each collection has a defined security posture, adhering to the principle that 'rules are not filters.'"
+  }
+}
+
+    

@@ -1,0 +1,144 @@
+
+/**
+ * @file Firestore Security Rules
+ * @description This ruleset enforces a user-ownership model for student profiles and grades, while providing public read access to course and announcement data.
+ * Data Structure:
+ * - /students/{studentId}: Student profile information, owned by the student.
+ * - /courses/{courseId}: Course information, publicly readable.
+ * - /teachers/{teacherId}: Teacher information.
+ * - /announcements/{announcementsId}: University announcements, publicly readable.
+ * - /grades/{gradeId}: Student grades, accessible only by the student.
+ * - /studentCommunityChat/{messageId}: Chat messages for the student community.
+ * - /writingPortal/{resourceId}: Collaborative writing resources.
+ * Key Security Decisions:
+ * - User listing is generally disallowed to protect privacy.
+ * - Public read access is granted only to collections explicitly intended for public consumption.
+ * - Write access to certain collections is restricted.
+ * Denormalization for Authorization:
+ * - Ownership checks are performed using the `studentId` in the document.
+ * Structural Segregation:
+ * - Public and private data are stored in separate collections to simplify rules and improve performance.
+ */
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    function isSignedIn() {
+      return request.auth != null;
+    }
+
+    /**
+     * @description Allows students to read and write their own profile data.
+     * @path /students/{studentId}
+     * @allow (get, list, update, delete) if the request is made by the student with the matching ID.
+     * @allow (create) if the authenticated user's ID matches the studentId.
+     * @deny (create, update, delete) if the request is made by a different user.
+     * @principle Enforces document ownership for writes and restricts access to a user's own data tree.
+     */
+    match /students/{studentId} {
+      function isOwner(studentId) {
+        return isSignedIn() && request.auth.uid == studentId;
+      }
+
+      allow get: if isOwner(studentId);
+      allow list: if false;
+
+      allow create: if isOwner(studentId);
+      allow update: if isOwner(studentId);
+      allow delete: if isOwner(studentId);
+    }
+
+    /**
+     * @description Allows public read access to course information, but restricts write access.
+     * @path /courses/{courseId}
+     * @allow (get, list) if true (publicly readable).
+     * @deny (create, update, delete) if false (write access is restricted).
+     * @principle Allows public read access to non-sensitive data.
+     */
+    match /courses/{courseId} {
+      allow get: if true;
+      allow list: if true;
+
+      allow create: if false;
+      allow update: if false;
+      allow delete: if false;
+    }
+
+    /**
+     * @description Restricts all access to teacher profile.
+     * @path /teachers/{teacherId}
+     * @deny (get, list, create, update, delete) if false (all access is restricted).
+     */
+    match /teachers/{teacherId} {
+      allow get: if false;
+      allow list: if false;
+      allow create: if false;
+      allow update: if false;
+      delete: if false;
+    }
+
+    /**
+     * @description Allows public read access to university announcements, but restricts write access.
+     * @path /announcements/{announcementId}
+     * @allow (get, list) if true (publicly readable).
+     * @deny (create, update, delete) if false (write access is restricted).
+     * @principle Allows public read access to non-sensitive data.
+     */
+    match /announcements/{announcementId} {
+      allow get: if true;
+      allow list: if true;
+      allow create: if false;
+      allow update: if false;
+      allow delete: if false;
+    }
+
+    /**
+     * @description Allows a student to read their own grades, but restricts write access.
+     * @path /grades/{gradeId}
+     *  @allow (get) if the request is made by the student with the matching studentId in the document.
+     * @allow (list) if false.
+     * @allow (create) if the request is made by the student with the matching studentId.
+     * @deny (update, delete) if the request is made by a different user.
+     * @principle Enforces document ownership for reads.
+     */
+    match /grades/{gradeId} {
+      allow get: if isSignedIn() && get(/databases/$(database)/documents/students/$(resource.data.studentId)).data.id == request.auth.uid;
+      allow list: if false;
+
+      allow create: if isSignedIn() && request.resource.data.studentId == request.auth.uid;
+      allow update: if false;
+      allow delete: if false;
+    }
+
+    /**
+     * @description Allows any authenticated student to read and create chat messages.
+     * @path /studentCommunityChat/{messageId}
+     * @allow (get, list) if true (public read).
+     * @allow (create) if the user is authenticated (e.g., logged into the app).
+     * @deny (update, delete) unless the user is the original author of the message.
+     * @principle Allows open communication among all authenticated students.
+     */
+    match /studentCommunityChat/{messageId} {
+      allow get: if true;
+      allow list: if true;
+      
+      // Allow any authenticated user to create a message.
+      allow create: if isSignedIn();
+      
+      // Only allow the original author to update or delete their message.
+      allow update: if isSignedIn() && request.auth.uid == resource.data.studentId;
+      allow delete: if isSignedIn() && request.auth.uid == resource.data.studentId;
+    }
+    
+    /**
+     * @description Allows public read access to the writing portal. All writes are denied.
+     * @path /writingPortal/{resourceId}
+     * @allow (read) if true.
+     * @deny (create, update, delete) if false.
+     */
+    match /writingPortal/{resourceId} {
+        allow read: if true;
+        allow write: if false;
+    }
+  }
+}

@@ -1,0 +1,34 @@
+{
+  "placeholderImages": [
+    {
+      "id": "user-avatar",
+      "description": "A placeholder avatar for the user profile.",
+      "imageUrl": "https://images.unsplash.com/photo-1732020858816-93c130ab8f49?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwxMHx8YWJzdHJhY3QlMjBhdmF0YXJ8ZW58MHx8fHwxNzYyNDA5NTgzfDA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "abstract avatar"
+    },
+    {
+      "id": "login-background",
+      "description": "A modern university campus building with a blurred effect.",
+      "imageUrl": "https://images.unsplash.com/photo-1680444873773-7c106c23ac52?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw1fHxtb2Rlcm4lMjBjb2xsZWdlfGVufDB8fHx8MTc2MjQ0MzkzOXww&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "modern college"
+    },
+    {
+      "id": "features-dashboard",
+      "description": "A vibrant and modern user interface dashboard.",
+      "imageUrl": "https://images.unsplash.com/photo-1643421551137-2d84e7a28cc6?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw3fHxkYXNoYm9hcmQlMjB1aXxlbnwwfHx8fDE3NjIzNzA5ODR8MA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "dashboard ui"
+    },
+    {
+      "id": "features-grades",
+      "description": "A digital report card showing student grades.",
+      "imageUrl": "https://images.unsplash.com/photo-1560785496-321917f24016?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwxfHxncmFkZXMlMjByZXBvcnR8ZW58MHx8fHwxNzYyNDQzODM0fDA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "grades report"
+    },
+    {
+      "id": "features-schedule",
+      "description": "A weekly schedule or calendar view.",
+      "imageUrl": "https://images.unsplash.com/photo-1642359085898-d9fde39507c9?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwyfHxjYWxlbmRhciUyMHNjaGVkdWxlfGVufDB8fHx8MTc2MjQzODU5MXww&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "calendar schedule"
+    }
+  ]
+}
