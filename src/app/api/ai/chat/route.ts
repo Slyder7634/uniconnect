@@ -8,9 +8,9 @@ export async function POST(req: Request) {
     const prompt = body?.prompt ?? '';
     const model = body?.model ?? 'gemini-flash-lite-latest';
 
-    const apiKey = process.env.GENAI_API_KEY || process.env.API_KEY;
+    const apiKey = process.env.GEMINI_API_KEY || process.env.API_KEY;
     if (!apiKey) {
-      return NextResponse.json({ error: 'GENAI_API_KEY not set on server' }, { status: 500 });
+      return NextResponse.json({ error: 'GEMINI_API_KEY not set on server' }, { status: 500 });
     }
 
     const genAI = new GoogleGenAI({ apiKey });

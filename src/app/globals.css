@@ -1,83 +1,71 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-
-body {
-  font-family: Arial, Helvetica, sans-serif;
-}
-
+ 
 @layer base {
   :root {
-    --background: 240 20% 5%;
-    --foreground: 0 0% 95%;
-    --card: 240 20% 8%;
-    --card-foreground: 0 0% 95%;
-    --popover: 240 20% 5%;
-    --popover-foreground: 0 0% 95%;
-    --primary: 252 56% 58%;
-    --primary-foreground: 0 0% 98%;
-    --secondary: 240 20% 12%;
-    --secondary-foreground: 0 0% 95%;
-    --muted: 240 20% 12%;
-    --muted-foreground: 215 20% 65%;
-    --accent: 291 64% 42%;
-    --accent-foreground: 0 0% 98%;
+    --background: 0 0% 100%;
+    --foreground: 222.2 84% 4.9%;
+
+    --card: 0 0% 100%;
+    --card-foreground: 222.2 84% 4.9%;
+ 
+    --popover: 0 0% 100%;
+    --popover-foreground: 222.2 84% 4.9%;
+ 
+    --primary: 222.2 47.4% 11.2%;
+    --primary-foreground: 210 40% 98%;
+ 
+    --secondary: 210 40% 96.1%;
+    --secondary-foreground: 222.2 47.4% 11.2%;
+ 
+    --muted: 210 40% 96.1%;
+    --muted-foreground: 215.4 16.3% 46.9%;
+ 
+    --accent: 210 40% 96.1%;
+    --accent-foreground: 222.2 47.4% 11.2%;
+ 
     --destructive: 0 84.2% 60.2%;
-    --destructive-foreground: 0 0% 98%;
-    --border: 240 20% 15%;
-    --input: 240 20% 15%;
-    --ring: 252 56% 58%;
-    --chart-1: 12 76% 61%;
-    --chart-2: 173 58% 39%;
-    --chart-3: 197 37% 24%;
-    --chart-4: 43 74% 66%;
-    --chart-5: 27 87% 67%;
+    --destructive-foreground: 210 40% 98%;
+
+    --border: 214.3 31.8% 91.4%;
+    --input: 214.3 31.8% 91.4%;
+    --ring: 222.2 84% 4.9%;
+ 
     --radius: 0.5rem;
-    --sidebar-background: 224 76% 12%;
-    --sidebar-foreground: 210 40% 98%;
-    --sidebar-primary: 210 40% 98%;
-    --sidebar-primary-foreground: 222 47% 11%;
-    --sidebar-accent: 217 33% 17%;
-    --sidebar-accent-foreground: 210 40% 98%;
-    --sidebar-border: 217 33% 20%;
-    --sidebar-ring: 215 54% 39%;
   }
+ 
   .dark {
-    --background: 224 76% 12%;
+    --background: 222.2 84% 4.9%;
     --foreground: 210 40% 98%;
-    --card: 222 47% 15%;
+ 
+    --card: 222.2 84% 4.9%;
     --card-foreground: 210 40% 98%;
-    --popover: 222 47% 11%;
+ 
+    --popover: 222.2 84% 4.9%;
     --popover-foreground: 210 40% 98%;
-    --primary: 217 91% 60%;
-    --primary-foreground: 224 76% 12%;
-    --secondary: 217 33% 17%;
+ 
+    --primary: 210 40% 98%;
+    --primary-foreground: 222.2 47.4% 11.2%;
+ 
+    --secondary: 217.2 32.6% 17.5%;
     --secondary-foreground: 210 40% 98%;
-    --muted: 217 33% 17%;
-    --muted-foreground: 215 20% 65%;
-    --accent: 217 91% 60%;
-    --accent-foreground: 0 0% 98%;
+ 
+    --muted: 217.2 32.6% 17.5%;
+    --muted-foreground: 215 20.2% 65.1%;
+ 
+    --accent: 217.2 32.6% 17.5%;
+    --accent-foreground: 210 40% 98%;
+ 
     --destructive: 0 62.8% 30.6%;
-    --destructive-foreground: 0 0% 98%;
-    --border: 217 33% 20%;
-    --input: 217 33% 20%;
-    --ring: 217 91% 60%;
-    --chart-1: 220 70% 50%;
-    --chart-2: 160 60% 45%;
-    --chart-3: 30 80% 55%;
-    --chart-4: 280 65% 60%;
-    --chart-5: 340 75% 55%;
-    --sidebar-background: 224 76% 12%;
-    --sidebar-foreground: 210 40% 98%;
-    --sidebar-primary: 210 40% 98%;
-    --sidebar-primary-foreground: 222 47% 11%;
-    --sidebar-accent: 217 33% 17%;
-    --sidebar-accent-foreground: 210 40% 98%;
-    --sidebar-border: 217 33% 20%;
-    --sidebar-ring: 215 54% 39%;
+    --destructive-foreground: 210 40% 98%;
+ 
+    --border: 217.2 32.6% 17.5%;
+    --input: 217.2 32.6% 17.5%;
+    --ring: 212.7 26.8% 83.9%;
   }
 }
-
+ 
 @layer base {
   * {
     @apply border-border;
@@ -87,103 +75,40 @@ body {
   }
 }
 
-@layer utilities {
-  .transition-all {
-    transition-property: all;
-    transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
-    transition-duration: 150ms;
-  }
-  
-  .animate-fade-in {
-    animation: fadeIn 0.3s ease-out;
-  }
-  
-  .animate-slide-in {
-    animation: slideIn 0.3s ease-out;
-  }
-  
-  .hover-lift {
-    @apply transition-transform duration-300;
-  }
-  
-  .hover-lift:hover {
-    transform: translateY(-2px);
-  }
-  
-  .glassmorphism {
-    @apply bg-opacity-20 backdrop-blur-lg;
-  }
-
-  .animate-gradient {
-    background-size: 300%;
-    animation: gradient 8s ease infinite;
-  }
-
-  .glass-effect {
-    @apply bg-white/10 backdrop-blur-lg border border-white/20 shadow-xl;
-  }
-
-  .glow {
-    box-shadow: 0 0 20px theme('colors.primary.DEFAULT');
-  }
-
-  .glow-text {
-    text-shadow: 0 0 10px theme('colors.primary.DEFAULT');
-  }
-
-  .shimmer {
-    background: linear-gradient(
-      90deg,
-      transparent 0%,
-      rgba(255, 255, 255, 0.1) 50%,
-      transparent 100%
-    );
-    background-size: 200% 100%;
-    animation: shimmer 2s linear infinite;
-  }
-
-  .gradient-border {
-    border: double 1px transparent;
-    background-image: linear-gradient(theme('colors.background'), theme('colors.background')),
-      linear-gradient(to right, theme('colors.primary.gradient.from'), theme('colors.primary.gradient.to'));
-    background-origin: border-box;
-    background-clip: padding-box, border-box;
-  }
+/* Custom scrollbar for chat areas */
+.chat-scrollbar {
+  scrollbar-width: thin; /* For Firefox */
+  scrollbar-color: #a0aec0 #f7fafc; /* For Firefox */
 }
 
-/* Custom Scrollbar */
-::-webkit-scrollbar {
-  width: 8px;
-  height: 8px;
+.chat-scrollbar::-webkit-scrollbar {
+  width: 6px;
 }
 
-::-webkit-scrollbar-track {
-  @apply bg-secondary/30;
+.chat-scrollbar::-webkit-scrollbar-track {
+  background: transparent;
 }
 
-::-webkit-scrollbar-thumb {
-  @apply bg-primary/50 rounded-full transition-colors hover:bg-primary/70;
+.chat-scrollbar::-webkit-scrollbar-thumb {
+  background-color: #a0aec0;
+  border-radius: 10px;
+  border: 3px solid transparent;
 }
 
-/* Smooth Page Transitions */
-.page-transition-enter {
-  opacity: 0;
-  transform: translate3d(0, 20px, 0);
+.dark .chat-scrollbar {
+  scrollbar-color: #4a5568 #1a202c;
 }
 
-.page-transition-enter-active {
-  opacity: 1;
-  transform: translate3d(0, 0, 0);
-  transition: opacity 300ms, transform 300ms;
+.dark .chat-scrollbar::-webkit-scrollbar-thumb {
+  background-color: #4a5568;
 }
 
-.page-transition-exit {
-  opacity: 1;
-  transform: translate3d(0, 0, 0);
+/* Hide scrollbar */
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
 }
 
-.page-transition-exit-active {
-  opacity: 0;
-  transform: translate3d(0, -20px, 0);
-  transition: opacity 300ms, transform 300ms;
+.no-scrollbar {
+  -ms-overflow-style: none;  /* IE and Edge */
+  scrollbar-width: none;  /* Firefox */
 }
