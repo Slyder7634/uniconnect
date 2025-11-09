@@ -29,8 +29,7 @@ export default function LoginPage() {
         <div className="flex items-center justify-center p-8 bg-background relative">
             <Link href="/" className="absolute top-8 left-8">
                 <Button variant="ghost">
-                    <ArrowLeft className="mr-2 h-4 w-4" />
-                    Back
+                    <ArrowLeft className="h-4 w-4" />
                 </Button>
             </Link>
             <div className="flex w-full max-w-sm flex-col items-center space-y-6">
