@@ -3,6 +3,7 @@ import './globals.css';
 import { Toaster } from "@/components/ui/toaster"
 import { FirebaseClientProvider } from '@/firebase';
 import AIAssistantClient from '@/components/ai/AIAssistantClient';
+import { AnimationWrapper } from '@/components/ui/animation-wrapper';
 
 export const metadata: Metadata = {
   title: 'UniConnect',
@@ -21,9 +22,11 @@ export default function RootLayout({
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
         <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
       </head>
-      <body className="font-body antialiased">
+      <body className="font-body antialiased bg-background transition-colors duration-300">
         <FirebaseClientProvider>
-          {children}
+          <AnimationWrapper>
+            {children}
+          </AnimationWrapper>
           <AIAssistantClient />
         </FirebaseClientProvider>
         <Toaster />
