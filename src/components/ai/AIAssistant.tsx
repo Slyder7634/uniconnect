@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import AssistantPanel from './AssistantPanel';
 import { useUser } from '@/firebase/provider';
 import { MessageCircle } from 'lucide-react';
@@ -16,7 +16,8 @@ const AIAssistant: React.FC = () => {
     if (!prompt) return;
     setError(null);
     const userMsg = { role: 'user', text: prompt };
-    // Add user message to the state
+    
+    // Add user message and a placeholder for the model's response
     setMessages(m => [...m, userMsg, { role: 'model', text: '' }]);
     setIsLoading(true);
 
@@ -24,39 +25,30 @@ const AIAssistant: React.FC = () => {
       const resp = await fetch('/api/ai/chat', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ prompt, userId: user?.uid ?? null }),
+        body: JSON.stringify({ prompt, history: messages, userId: user?.uid ?? null }),
       });
 
+      const data = await resp.json();
+
       if (!resp.ok) {
-        // If the response is not OK, read the error message from the body
-        const errorData = await resp.json();
-        throw new Error(errorData.error || 'AI request failed with no specific error message.');
+        throw new Error(data.error || 'AI request failed.');
       }
 
-      if (!resp.body) throw new Error('No response body');
-
-      const reader = resp.body.getReader();
-      const decoder = new TextDecoder();
-      let done = false;
-
-      while (!done) {
-        const { value, done: readerDone } = await reader.read();
-        done = readerDone;
-        const chunk = decoder.decode(value, { stream: true });
-        setMessages(currentMessages => {
+      // Update the placeholder message with the actual response
+      setMessages(currentMessages => {
           const newMessages = [...currentMessages];
           const lastMessage = newMessages[newMessages.length - 1];
           if (lastMessage.role === 'model') {
-            lastMessage.text += chunk;
+            lastMessage.text = data.text;
           }
           return newMessages;
-        });
-      }
+      });
+
     } catch (e: any) {
       console.error(e);
       setError(e?.message ?? 'An error occurred');
-      // Remove the incomplete AI message on error
-      setMessages(m => m.slice(0, m.length -1));
+      // Remove the placeholder model message on error
+      setMessages(m => m.slice(0, m.length - 1));
     } finally {
       setIsLoading(false);
     }
