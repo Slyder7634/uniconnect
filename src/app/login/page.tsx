@@ -22,7 +22,7 @@ export default function LoginPage() {
              />
            )}
             <div className="relative z-10 flex h-full flex-col justify-end bg-black/40 p-10 text-white">
-                <h2 className="text-3xl font-bold">Welcome to UniConnect</h2>
+                <h2 className="text-3xl font-bold">Welcome to UniBridge</h2>
                 <p className="mt-2 text-lg leading-relaxed">Your central hub for academic success. Connect, learn, and grow with us.</p>
             </div>
         </div>
@@ -36,7 +36,7 @@ export default function LoginPage() {
                 <Link href="/" className="flex items-center space-x-2">
                     <Icons.Logo className="h-10 w-10 text-primary" />
                     <h1 className="text-3xl font-bold tracking-tight text-foreground">
-                        UniConnect
+                        UniBridge
                     </h1>
                 </Link>
                 <Card className="w-full border-0 shadow-none sm:border sm:shadow-sm">

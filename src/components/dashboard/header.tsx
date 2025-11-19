@@ -20,7 +20,7 @@ import { LogOut, User } from "lucide-react";
 import { useAuth } from "@/firebase";
 
 const teacherUser = {
-    id: 'teacher@uniconnect.com',
+    id: 'teacher@UniBridge.com',
     name: 'Dr. Turing',
     role: 'teacher' as const,
 };
@@ -28,7 +28,7 @@ const teacherUser = {
 export function Header() {
   const pathname = usePathname();
   const isTeacher = pathname.startsWith('/teacher');
-  const user = isTeacher ? teacherUser : { ...studentUser, id: 'student@uniconnect.com' };
+  const user = isTeacher ? teacherUser : { ...studentUser, id: 'student@UniBridge.com' };
   
   const avatar = PlaceHolderImages.find((img) => img.id === "user-avatar");
   

@@ -7,17 +7,17 @@ const advisors = [
   {
     name: 'Prof. Charu Singh',
     department: 'Computer Science & Engineering',
-    email: 'csingh@uniconnect.edu',
+    email: 'csingh@UniBridge.edu',
   },
   {
     name: 'Dr. Payal Devi',
     department: 'Humanities & Social Sciences',
-    email: 'pdevi@uniconnect.edu',
+    email: 'pdevi@UniBridge.edu',
   },
   {
     name: 'Prof. Upasana Upadhyay',
     department: 'Natural & Applied Sciences',
-    email: 'uupadhyay@uniconnect.edu',
+    email: 'uupadhyay@UniBridge.edu',
   },
 ];
 

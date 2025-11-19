@@ -1,8 +1,8 @@
-# UniConnect - Your All-in-One University Hub
+# UniBridge - Your All-in-One University Hub
 
-![UniConnect Logo](https://raw.githubusercontent.com/firebase/firebase-studio/main/static/img/logo-256.png)
+![UniBridge Logo](https://raw.githubusercontent.com/firebase/firebase-studio/main/static/img/logo-256.png)
 
-**UniConnect** is a modern, all-in-one student and teacher portal designed to streamline the university experience. Built with a powerful tech stack including Next.js, Firebase, and Google's Gemini AI, it provides a seamless and intuitive interface for managing academic life.
+**UniBridge** is a modern, all-in-one student and teacher portal designed to streamline the university experience. Built with a powerful tech stack including Next.js, Firebase, and Google's Gemini AI, it provides a seamless and intuitive interface for managing academic life.
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](https://opensource.org/licenses/MIT)
 [![Next.js](https://img.shields.io/badge/Next.js-15.x-black?logo=next.js)](https://nextjs.org/)
@@ -13,7 +13,7 @@
 
 ## ✨ Features
 
-UniConnect is packed with features for both students and faculty, creating a centralized hub for all academic needs.
+UniBridge is packed with features for both students and faculty, creating a centralized hub for all academic needs.
 
 ### For Students:
 - **Personalized Dashboard:** A quick overview of upcoming classes, GPA, and recent announcements.
@@ -32,7 +32,7 @@ UniConnect is packed with features for both students and faculty, creating a cen
 - **Exam Management:** Create and manage exam schedules for your courses.
 
 ### 🤖 AI-Powered Assistant
-- **UniConnect AI:** An intelligent chatbot powered by **Google Gemini** to instantly answer questions about university life, policies, schedules, and more.
+- **UniBridge AI:** An intelligent chatbot powered by **Google Gemini** to instantly answer questions about university life, policies, schedules, and more.
 
 ---
 
@@ -62,8 +62,8 @@ To get a local copy up and running, follow these simple steps.
 
 1.  **Clone the repository:**
     ```sh
-    git clone https://github.com/your-username/uniconnect.git
-    cd uniconnect
+    git clone https://github.com/your-username/UniBridge.git
+    cd UniBridge
     ```
 
 2.  **Install NPM packages:**

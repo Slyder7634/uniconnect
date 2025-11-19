@@ -8,7 +8,7 @@ import { ThemeProvider } from '@/components/theme/ThemeProvider';
 import { ThemeToggleButton } from '@/components/theme/ThemeToggleButton';
 
 export const metadata: Metadata = {
-  title: 'UniConnect',
+  title: 'UniBridge',
   description: 'A comprehensive University Student Portal',
 };
 

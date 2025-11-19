@@ -33,7 +33,7 @@ export function SlideShowSection() {
           className="text-center mb-16"
         >
           <h2 className="text-4xl font-bold tracking-tight bg-clip-text text-transparent bg-gradient-to-r from-primary to-accent inline-block">
-            What's New at UniConnect
+            What's New at UniBridge
           </h2>
           <p className="mt-4 text-xl text-muted-foreground">
             Explore our latest and greatest features.

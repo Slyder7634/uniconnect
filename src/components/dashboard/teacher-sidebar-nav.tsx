@@ -64,7 +64,7 @@ export function TeacherSidebarNav() {
         <div className="flex items-center gap-2">
           <Icons.Logo className="size-8 text-sidebar-primary" />
           <span className="text-lg font-semibold text-sidebar-primary">
-            UniConnect
+            UniBridge
           </span>
         </div>
       </SidebarHeader>

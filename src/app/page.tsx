@@ -15,7 +15,7 @@ export default function Home() {
           <Link href='/' className='flex items-center space-x-2'>
             <Icons.Logo className='h-8 w-8 text-primary' />
             <h1 className='text-2xl font-bold tracking-tight text-foreground'>
-              UniConnect
+              UniBridge
             </h1>
           </Link>
           <nav>
@@ -34,7 +34,7 @@ export default function Home() {
 
       <footer className='border-t border-white/10 bg-background/80 backdrop-blur-lg'>
         <div className='container mx-auto px-4 sm:px-6 lg:px-8 py-8 text-center'>
-          <p className='text-muted-foreground'>&copy; {new Date().getFullYear()} UniConnect. All Rights Reserved.</p>
+          <p className='text-muted-foreground'>&copy; {new Date().getFullYear()} UniBridge. All Rights Reserved.</p>
         </div>
       </footer>
     </div>

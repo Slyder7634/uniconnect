@@ -49,7 +49,7 @@ export function HeroSection() {
             transition={{ duration: 0.6, delay: 0.2 }}
             className="mt-6 text-xl text-muted-foreground sm:text-2xl max-w-2xl mx-auto"
           >
-            UniConnect brings your entire campus experience into one seamless platform. Access grades, schedules, announcements, and resources with ease.
+            UniBridge brings your entire campus experience into one seamless platform. Access grades, schedules, announcements, and resources with ease.
           </motion.p>
 
           <motion.div

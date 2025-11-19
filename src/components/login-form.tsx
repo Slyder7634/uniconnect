@@ -27,8 +27,8 @@ const formSchema = z.object({
 });
 
 const FAKE_USERS = {
-  "student@uniconnect.com": { password: "password", role: "student" },
-  "teacher@uniconnect.com": { password: "password", role: "teacher" },
+  "student@UniBridge.com": { password: "password", role: "student" },
+  "teacher@UniBridge.com": { password: "password", role: "teacher" },
 };
 
 export function LoginForm() {
@@ -77,7 +77,7 @@ export function LoginForm() {
               <FormItem>
                 <FormLabel>Email</FormLabel>
                 <FormControl>
-                  <Input placeholder="e.g., student@uniconnect.com" {...field} />
+                  <Input placeholder="e.g., student@UniBridge.com" {...field} />
                 </FormControl>
                 <FormMessage />
               </FormItem>
@@ -107,8 +107,8 @@ export function LoginForm() {
         <AlertDescription>
           <p>Use the following credentials for testing:</p>
           <ul className="list-disc pl-5 mt-2 text-sm">
-            <li><b>Email:</b> student@uniconnect.com, <b>Password:</b> password</li>
-            <li><b>Email:</b> teacher@uniconnect.com, <b>Password:</b> password</li>
+            <li><b>Email:</b> student@UniBridge.com, <b>Password:</b> password</li>
+            <li><b>Email:</b> teacher@UniBridge.com, <b>Password:</b> password</li>
           </ul>
         </AlertDescription>
       </Alert>

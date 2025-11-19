@@ -1,4 +1,4 @@
-# **App Name**: UniConnect
+# **App Name**: UniBridge
 
 ## Core Features:
 

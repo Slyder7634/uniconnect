@@ -11,7 +11,7 @@ const handbookSections = [
   {
     id: 'conduct',
     title: 'Code of Conduct',
-    content: `UniConnect is committed to maintaining a safe and respectful environment for all students, faculty, and staff. All members of the university community are expected to adhere to the principles of honesty, integrity, and respect. Prohibited behaviors include, but are not limited to, harassment, discrimination, bullying, and any form of violence. Students are expected to conduct themselves in a manner that is conducive to a positive learning environment, both on and off campus. Violations of the Code of Conduct will be subject to disciplinary action.`,
+    content: `UniBridge is committed to maintaining a safe and respectful environment for all students, faculty, and staff. All members of the university community are expected to adhere to the principles of honesty, integrity, and respect. Prohibited behaviors include, but are not limited to, harassment, discrimination, bullying, and any form of violence. Students are expected to conduct themselves in a manner that is conducive to a positive learning environment, both on and off campus. Violations of the Code of Conduct will be subject to disciplinary action.`,
   },
   {
     id: 'integrity',
