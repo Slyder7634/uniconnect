@@ -24,17 +24,13 @@ const AIAssistant: React.FC = () => {
       const resp = await fetch('/api/ai/chat', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ 
-          prompt, 
-          history: messages 
-        }),
+        body: JSON.stringify({ prompt, userId: user?.uid ?? null }),
       });
 
       if (!resp.ok) {
         // If the response is not OK, read the error message from the body
-        const errorText = await resp.text();
-        console.error("AI API returned an error:", errorText);
-        throw new Error('AI request failed. Check the server logs for details.');
+        const errorData = await resp.json();
+        throw new Error(errorData.error || 'AI request failed with no specific error message.');
       }
 
       if (!resp.body) throw new Error('No response body');
