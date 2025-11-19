@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import AssistantPanel from './AssistantPanel';
 import { useUser } from '@/firebase/provider';
 import { MessageCircle } from 'lucide-react';
@@ -16,21 +16,51 @@ const AIAssistant: React.FC = () => {
     if (!prompt) return;
     setError(null);
     const userMsg = { role: 'user', text: prompt };
-    setMessages(m => [...m, userMsg]);
+    // Add user message to the state
+    setMessages(m => [...m, userMsg, { role: 'model', text: '' }]);
     setIsLoading(true);
+
     try {
       const resp = await fetch('/api/ai/chat', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ prompt, userId: user?.uid ?? null }),
+        body: JSON.stringify({ 
+          prompt, 
+          history: messages 
+        }),
       });
-      if (!resp.ok) throw new Error('AI request failed');
-      const data = await resp.json();
-      const aiText = data.text ?? data.answer ?? JSON.stringify(data);
-      setMessages(m => [...m, { role: 'model', text: aiText }]);
+
+      if (!resp.ok) {
+        // If the response is not OK, read the error message from the body
+        const errorText = await resp.text();
+        console.error("AI API returned an error:", errorText);
+        throw new Error('AI request failed. Check the server logs for details.');
+      }
+
+      if (!resp.body) throw new Error('No response body');
+
+      const reader = resp.body.getReader();
+      const decoder = new TextDecoder();
+      let done = false;
+
+      while (!done) {
+        const { value, done: readerDone } = await reader.read();
+        done = readerDone;
+        const chunk = decoder.decode(value, { stream: true });
+        setMessages(currentMessages => {
+          const newMessages = [...currentMessages];
+          const lastMessage = newMessages[newMessages.length - 1];
+          if (lastMessage.role === 'model') {
+            lastMessage.text += chunk;
+          }
+          return newMessages;
+        });
+      }
     } catch (e: any) {
       console.error(e);
       setError(e?.message ?? 'An error occurred');
+      // Remove the incomplete AI message on error
+      setMessages(m => m.slice(0, m.length -1));
     } finally {
       setIsLoading(false);
     }

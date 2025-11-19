@@ -22,7 +22,7 @@ const ChatBubble: React.FC<Props> = ({ message }) => {
         `}
       >
         <div className="whitespace-pre-wrap break-words text-sm">
-          {message?.text ?? (message?.parts && message.parts[0]?.text) ?? ''}
+        {message?.text}
         </div>
         <div className={`
           absolute -bottom-4 ${isModel ? 'left-0' : 'right-0'}
