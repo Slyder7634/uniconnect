@@ -2,7 +2,7 @@
 
 import React, { useState, useRef, useEffect } from 'react';
 import ChatBubble from './ChatBubble';
-import { Trash2, X, Send } from 'lucide-react';
+import { Trash2, X, Send, Mic } from 'lucide-react';
 
 interface Props {
   onClose: () => void;
@@ -17,6 +17,7 @@ const AssistantPanel: React.FC<Props> = ({ onClose, messages, onSendMessage, isL
   const [prompt, setPrompt] = useState('');
   const endRef = useRef<HTMLDivElement | null>(null);
   const textareaRef = useRef<HTMLTextAreaElement | null>(null);
+  const [isRecording, setIsRecording] = useState(false);
 
   // Auto-scroll to the latest message
   useEffect(() => {
@@ -38,6 +39,34 @@ const AssistantPanel: React.FC<Props> = ({ onClose, messages, onSendMessage, isL
     if (!trimmedPrompt) return;
     onSendMessage(trimmedPrompt);
     setPrompt('');
+  };
+
+  const handleVoiceInput = () => {
+    const recognition = new ((window as any).SpeechRecognition || (window as any).webkitSpeechRecognition)();
+    recognition.interimResults = true;
+    recognition.lang = 'en-US';
+
+    recognition.onstart = () => {
+      setIsRecording(true);
+    };
+
+    recognition.onend = () => {
+      setIsRecording(false);
+    };
+
+    recognition.onresult = (event: any) => {
+      const transcript = Array.from(event.results)
+        .map((result: any) => result[0])
+        .map((result) => result.transcript)
+        .join('');
+      setPrompt(transcript);
+    };
+
+    if (isRecording) {
+      recognition.stop();
+    } else {
+      recognition.start();
+    }
   };
 
   return (
@@ -95,7 +124,7 @@ const AssistantPanel: React.FC<Props> = ({ onClose, messages, onSendMessage, isL
             value={prompt}
             onChange={(e) => setPrompt(e.target.value)}
             placeholder="Ask me anything..."
-            className="w-full p-3 pr-12 bg-gray-100 dark:bg-gray-700/50 border border-transparent rounded-xl resize-none max-h-40 focus:ring-2 focus:ring-indigo-500 focus:bg-white dark:focus:bg-gray-700 transition-all duration-200 text-sm text-gray-800 dark:text-gray-100 placeholder-gray-500 dark:placeholder-gray-400 no-scrollbar"
+            className="w-full p-3 pr-24 bg-gray-100 dark:bg-gray-700/50 border border-transparent rounded-xl resize-none max-h-40 focus:ring-2 focus:ring-indigo-500 focus:bg-white dark:focus:bg-gray-700 transition-all duration-200 text-sm text-gray-800 dark:text-gray-100 placeholder-gray-500 dark:placeholder-gray-400 no-scrollbar"
             rows={1}
             onKeyDown={(e) => {
               if (e.key === 'Enter' && !e.shiftKey) {
@@ -104,6 +133,14 @@ const AssistantPanel: React.FC<Props> = ({ onClose, messages, onSendMessage, isL
               }
             }}
           />
+          <button
+            type="button"
+            onClick={handleVoiceInput}
+            className={`absolute right-14 bottom-2.5 p-2 rounded-full transition-colors ${isRecording ? 'bg-red-500 text-white' : 'text-gray-500 hover:bg-gray-200 dark:hover:bg-gray-700'}`}
+            aria-label="Toggle Voice Input"
+          >
+            <Mic size={18} />
+          </button>
           <button
             type="submit"
             className="absolute right-3 bottom-2.5 p-2 bg-indigo-600 text-white rounded-full hover:bg-indigo-700 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
